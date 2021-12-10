@@ -1,0 +1,3 @@
+/home/gerardo/Documentos/[MIA]Archivos/proyecto_1/proyecto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gerardo/Documentos/[MIA]Archivos/proyecto_1/proyecto/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/gerardo/Documentos/[MIA]Archivos/proyecto_1/proyecto/cmake-build-debug/CMakeFiles/proyecto.dir
