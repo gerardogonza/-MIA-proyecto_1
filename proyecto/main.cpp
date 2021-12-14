@@ -17,9 +17,9 @@ void analizar(string cadena);
 int main()
 {
  analizar("Mkdisk -Size~:~3000 -unit~:~K -path~:~/home/gerardo/Documentos/Disco1.disk");
-//  crearDisco(3000, 1,"/home/gerardo/Documentos/Disco1.disk");
+// crearDisco(3000, 1,"/home/gerardo/Documentos/Disco1.disk");
 //  eliminarDisco("/home/gerardo/Documentos/Disco1.disk");
-  crearParticion("3000", "k", "/home/gerardo/Documentos/Disco1.disk" , "ff" , "p" , "elbicho" );
+  crearParticion("300", "k", "/home/gerardo/Documentos/Disco1.disk" , "ff" , "p" , "elbiho" );
     return 0;
 
 }

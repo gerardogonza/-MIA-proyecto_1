@@ -1,0 +1,1 @@
+Mkdisk -size = 8 -unit=k -path = /home/gerardo/Documentos/Discos MIA/Disco1.disk

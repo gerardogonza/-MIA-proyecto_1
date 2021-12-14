@@ -8,11 +8,6 @@
 
 #define MAX_DIGITS 10
 
-
-
-
-
-
 using namespace std;
 std::array<std::string, 11> getDatos();
 void cleanEs();
@@ -77,7 +72,7 @@ CUERPO_MDISK: CUERPO_MDISK P_MDISK|
 	P_MDISK
 	;
 P_MDISK:
-	 size igual numero unit igual identificador path igual ruta
+	 size igual numero unit igual identificador path igual ruta {    cout<< $9<< endl;}
 	 ;
 
 

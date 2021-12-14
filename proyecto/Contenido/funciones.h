@@ -68,7 +68,7 @@ char ruta[500];
 strcpy(ruta,pat.c_str());
     int error;
     string completePath =  pat;
-    char diskc[1];
+    char diskc[size+1];
     strcpy(diskc, completePath.c_str());
     cout << diskc << endl;
     FILE *file = NULL;

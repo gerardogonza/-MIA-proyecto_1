@@ -76,11 +76,6 @@
 
 #define MAX_DIGITS 10
 
-
-
-
-
-
 using namespace std;
 std::array<std::string, 11> getDatos();
 void cleanEs();
@@ -92,7 +87,7 @@ int yyerror(const char* msg){
 }
 
 
-#line 96 "parser.cpp"
+#line 91 "parser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -163,14 +158,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 54 "sintactico.y"
+#line 49 "sintactico.y"
 
     int number;
     char text[200];
     char entrance[12];
     int other;
 
-#line 174 "parser.cpp"
+#line 169 "parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -547,7 +542,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    63,    63,    64,    67,    71,    76,    77,    80
+       0,    58,    58,    59,    62,    66,    71,    72,    75
 };
 #endif
 
@@ -1340,15 +1335,21 @@ yyreduce:
   switch (yyn)
     {
   case 5:
-#line 71 "sintactico.y"
+#line 66 "sintactico.y"
                            {
 
 }
-#line 1348 "parser.cpp"
+#line 1343 "parser.cpp"
+    break;
+
+  case 8:
+#line 75 "sintactico.y"
+                                                                    {    cout<< (yyvsp[0].entrance)<< endl;}
+#line 1349 "parser.cpp"
     break;
 
 
-#line 1352 "parser.cpp"
+#line 1353 "parser.cpp"
 
       default: break;
     }
@@ -1580,6 +1581,6 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 84 "sintactico.y"
+#line 79 "sintactico.y"
 
 
