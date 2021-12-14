@@ -55,10 +55,10 @@ COMENTARIO      "#"[^\r\n]*[^\r\n]
 {UNIT} {return(unit);}
 {PATH} {return(path);}
 
-{RUTA} {return(ruta);}
-{RUTARARA} {return(rutarara);}
+{RUTA} {strcpy(yylval.text, yytext); return(ruta);}
+{RUTARARA} {strcpy(yylval.text, yytext); return(rutarara);}
 {IGUAL} {return(igual);}
-{IDENTIFICADOR} {return(identificador);}
+{IDENTIFICADOR} {strcpy(yylval.text, yytext); return(identificador);}
 {WHITESPACE}           {}
 {COMENTARIO} {strcpy(yylval.text, yytext); return(comentario);}
 .               {printf("Caracter %s no admitido\n ", yytext);}

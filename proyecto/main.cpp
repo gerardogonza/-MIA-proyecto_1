@@ -2,20 +2,24 @@
 #include "Analizador/parser.h"
 #include "Analizador/scanner.h"
 #include <fstream>
+#include "Contenido/funciones.h"
+#include "Contenido/fdisk.h"
 using namespace std;
 using std::cout; using std::cerr;
 using std::endl; using std::string;
 using std::ifstream;
 
-//**************** FUNCIONES Y METODOS
+
 void analizar(string cadena);
 
 
 
 int main()
 {
-    analizar("Mkdisk -Size~:~3000 -unit~:~K -path~:~/home/user/Disco1.disk");
-
+ analizar("Mkdisk -Size~:~3000 -unit~:~K -path~:~/home/gerardo/Documentos/Disco1.disk");
+//  crearDisco(3000, 1,"/home/gerardo/Documentos/Disco1.disk");
+//  eliminarDisco("/home/gerardo/Documentos/Disco1.disk");
+  crearParticion("3000", "k", "/home/gerardo/Documentos/Disco1.disk" , "ff" , "p" , "elbicho" );
     return 0;
 
 }

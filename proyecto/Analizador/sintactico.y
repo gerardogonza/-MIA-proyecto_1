@@ -5,7 +5,13 @@
 #include <array>
 #include <list>
 #include <cstring>
+
 #define MAX_DIGITS 10
+
+
+
+
+
 
 using namespace std;
 std::array<std::string, 11> getDatos();
@@ -35,8 +41,8 @@ int yyerror(const char* msg){
 %token <text> path
 %token <text> igual
 %token <text> identificador
-%token <text> ruta
-%token <text> rutarara
+%token <entrance> ruta
+%token <entrance> rutarara
 
 
 
@@ -62,9 +68,17 @@ CUERPO: MKDISK
 
 ;
 
-MKDISK: mkdisk size igual numero unit igual identificador path igual ruta{ cout<< "QUE DICEEEEE" << endl;}
-;
+MKDISK: mkdisk CUERPO_MDISK{
 
+}
+
+;
+CUERPO_MDISK: CUERPO_MDISK P_MDISK|
+	P_MDISK
+	;
+P_MDISK:
+	 size igual numero unit igual identificador path igual ruta
+	 ;
 
 
 %%

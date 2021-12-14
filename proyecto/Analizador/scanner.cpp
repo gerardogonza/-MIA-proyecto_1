@@ -906,12 +906,12 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 58 "lexico.l"
-{return(ruta);}
+{strcpy(yylval.text, yytext); return(ruta);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 59 "lexico.l"
-{return(rutarara);}
+{strcpy(yylval.text, yytext); return(rutarara);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
@@ -921,7 +921,7 @@ YY_RULE_SETUP
 case 17:
 YY_RULE_SETUP
 #line 61 "lexico.l"
-{return(identificador);}
+{strcpy(yylval.text, yytext); return(identificador);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
