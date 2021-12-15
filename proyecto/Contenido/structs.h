@@ -1,6 +1,7 @@
 
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 string rpath = "/home/gerardo/Documents";
@@ -41,5 +42,20 @@ struct espacio{
     string particion;
 };
 
+struct particionM {
+    //---Info del mount
+    int numeroM = 0;
+    int estado = 0;
+    string nombreParticion;
+};
+
+struct listaM{
+    int id;
+    //---Info del disco a montar
+    string nombreDisco;
+    string ruta;
+    string letra;
+    vector<particionM> listaParticionesMontadas;
+};
 
 

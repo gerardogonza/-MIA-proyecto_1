@@ -7,6 +7,7 @@
 #include <cstring>
 #include "../Contenido/funciones.h"
 #include "../Contenido/fdisk.h"
+#include "../Contenido/mount.h"
 #define MAX_DIGITS 10
 
 using namespace std;
@@ -15,7 +16,7 @@ void cleanEs();
 
 int Pause();
 int yylex();
-static string fitD = "ff", unitD = "k", pathD = "", typeD="p", nameD="";
+static string fitD = "ff", unitD = "k", pathD = "", typeD="p", nameD="", idMountD="",bandera="",deleteD="";
 static int sizeD = 0;
 
 int yyerror(const char* msg){
@@ -44,6 +45,7 @@ int yyerror(const char* msg){
 %token <text> name
 %token <text> identificador
 %token <text> deletep
+%token <text> id
 %token <entrance> ruta
 %token <entrance> rutarara
 
@@ -69,7 +71,8 @@ START: START CUERPO
 
 CUERPO: MKDISK|
 	RMDISK|
-	FDISK
+	FDISK|
+	MOUNT
 
 ;
 
@@ -91,7 +94,14 @@ CUERPO_RMDISK: CUERPO_RMDISK P_RMDISK|
 	;
 P_RMDISK: path igual ruta { eliminarDisco($3); }
 
-FDISK: fdisk CUERPO_FDISK {crearParticion(sizeD, unitD, pathD ,fitD ,typeD, nameD);}
+FDISK: fdisk CUERPO_FDISK {
+		  if(bandera != "jeje"){
+			crearParticion(sizeD, unitD, pathD ,fitD ,typeD, nameD);
+		  }else{
+		  	eliminarP(nameD,pathD,deleteD);
+		  }
+			}
+
 ;
 CUERPO_FDISK: CUERPO_FDISK P_FDISK |
 	P_FDISK
@@ -102,9 +112,21 @@ P_FDISK:
 		path igual ruta {pathD=$3;}|
 		type igual identificador {typeD=$3;}|
 		fit igual identificador {fitD=$3;}|
-		deletep igual identificador {eliminarP(nameD,pathD,$3);}|
+		deletep igual identificador {bandera="jeje"; deleteD=$3 ;}|
 		name igual identificador {nameD=$3;}
 
 	 ;
+MOUNT: mount CUERPO_MOUNT {montarParticion(pathD,nameD);}|
+	unmount CUERPO_MOUNT {desmontarParticion(idMountD);}
+;
+CUERPO_MOUNT: CUERPO_MOUNT P_MOUNT |
+	P_MOUNT
+	;
+P_MOUNT:
+		path igual ruta {pathD=$3;}|
+		name igual identificador {nameD=$3;}|
+		id igual identificador numero {string str1= to_string($4); idMountD=$3+str1;  }
+	 ;
+
 %%
 

@@ -37,6 +37,7 @@ PATH        "-path"
 TYPE        "-type"
 NAME        "-name"
 DELETE      "-delete"
+ID          "-id"
 
 IGUAL       "~:~"
 COMENTARIO      "#"[^\r\n]*[^\r\n]
@@ -61,6 +62,7 @@ COMENTARIO      "#"[^\r\n]*[^\r\n]
 {TYPE} {return(type);}
 {NAME} {return(name);}
 {DELETE} {return(deletep);}
+{ID} {return(id);}
 
 {RUTA} {strcpy(yylval.text, yytext); return(ruta);}
 {RUTARARA} {strcpy(yylval.text, yytext); return(rutarara);}

@@ -772,24 +772,22 @@ void eliminarP(string nam, string pat, string tipo){
 }
 
 void eliminarParticion(string nam, string pat, string tipo){
+
     int BborroP = 0;
     char ruta[500];
+    char nom[16];
+    strcpy(nom,nam.c_str());
     strcpy(ruta,pat.c_str());
 
-    string completePath =  pat;
-    char diskc[1];
-    strcpy(diskc, completePath.c_str());
-    FILE *file = NULL;
-    file = fopen(diskc, "r");
-    if (file != NULL)
-    {
-        cout << "La Ruta es valida" << endl;
-        FILE *fileC;
-        fileC= fopen(ruta,"rb+");
-        rewind(fileC);
-        MBR mbrtemp;
-        fread(&mbrtemp,sizeof(MBR),1,fileC);
-        if(fileC != nullptr){
+    FILE *fileC;
+
+    fileC= fopen(ruta,"rb+");
+    rewind(fileC);
+    MBR mbrtemp;
+    fread(&mbrtemp,sizeof(MBR),1,fileC);
+    cout << "Particion Encontrada"<< endl;
+
+    if(fileC!=nullptr){
             for (int i = 0; i < 4; i++) {
                 if ((mbrtemp.partition[i].status == '1') && (BborroP == 0)) {
 
@@ -801,7 +799,7 @@ void eliminarParticion(string nam, string pat, string tipo){
                             rewind(fileC);
                             fwrite(&mbrtemp, sizeof(MBR), 1, fileC); // aca escribo de nuevo el MBR
 
-                            cout << "AVISO: Particion eliminada correctamente. en la P  " <<i<<" FAST"<<endl;
+                            cout << "AVISO: Particion eliminada correctamente. en la P " <<i<<" FAST"<<endl;
                             BborroP = 1;
                         } else {
                             mbrtemp.partition[i].status = '0';
@@ -814,7 +812,7 @@ void eliminarParticion(string nam, string pat, string tipo){
                             rewind(fileC);
                             fwrite(&mbrtemp, sizeof(MBR), 1, fileC); // aca escribo de nuevo el MBR
 
-                            cout << "AVISO: Particion eliminada correctamente.  en la P  " <<i<<" FULL"<<endl;
+                            cout << "AVISO: Particion eliminada correctamente.  en la P " <<i<<" FULL"<<endl;
                             BborroP = 1;
                         }
 
@@ -836,10 +834,7 @@ void eliminarParticion(string nam, string pat, string tipo){
 
 
 
-    } else{
-        cout << "ERROR esa ruta no es valida" << endl;
 
-    }
 }
 
 

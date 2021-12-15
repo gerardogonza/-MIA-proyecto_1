@@ -16,11 +16,13 @@ void analizar(string cadena);
 
 int main()
 {
- analizar("Mkdisk -Size~:~3000 -unit~:~K -path~:~/home/gerardo/Documentos/Disco9.disk");
- analizar("Mkdisk -path~:~/home/gerardo/Documentos/Disco1.disk -unit~:~K  -Size~:~ 3000 ");
+// analizar("Mkdisk -Size~:~3000 -unit~:~K -path~:~/home/gerardo/Documentos/Disco9.disk");
+// analizar("Mkdisk -path~:~/home/gerardo/Documentos/Disco1.disk -unit~:~K  -Size~:~ 3000 ");
 // analizar("rmdisk -path ~:~ /home/gerardo/Documentos/Disco1.disk");
 //    analizar("fdisk -type ~:~ e -path ~:~ /home/gerardo/Documentos/Disco9.disk -unit ~:~ k -name~:~ buenas -size ~:~ 30");
-    analizar("fdisk -delete ~:~ fast -name ~:~ buenas -path~:~/home/gerardo/Documentos/Disco9.disk");
+//    analizar("fdisk -delete ~:~ fast -name ~:~ buenas -path~:~/home/gerardo/Documentos/Disco9.disk");
+  // analizar("mount -path~:~/home/gerardo/Documentos/Disco9.disk -name ~:~ mamadas" );
+  //  analizar("unmount -id~:~vda1" );
 // crearDisco(3000, 1,"/home/gerardo/Documentos/Disco1.disk");
 //  eliminarDisco("/home/gerardo/Documentos/Disco1.disk");
 //  crearParticion("300", "k", "/home/gerardo/Documentos/Disco8.disk" , "ff" , "p" , "elbiho" );
