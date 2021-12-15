@@ -7,13 +7,14 @@
 #include <ctime>
 #include <ctype.h>
 #include "structs.h"
+
 using namespace std;
 
-void crearDisco(int size,int unit,string spath)
+void crearDisco(int size,string unit,string spath)
 {
 
 
-    cout << "Creando disco... " <<size<< endl;
+    cout << "Creando disco... " <<spath<< endl;
     string completePath =  spath;
     char diskc[size + 1];
     strcpy(diskc, completePath.c_str());
@@ -26,7 +27,7 @@ void crearDisco(int size,int unit,string spath)
         return;
     }
     int size_new;
-    if (unit = 1)
+    if (unit == "k" | unit =="K")
     {
         size_new = size * 1024;
     }
@@ -68,7 +69,7 @@ char ruta[500];
 strcpy(ruta,pat.c_str());
     int error;
     string completePath =  pat;
-    char diskc[size+1];
+    char diskc[1];
     strcpy(diskc, completePath.c_str());
     cout << diskc << endl;
     FILE *file = NULL;

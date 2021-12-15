@@ -29,10 +29,14 @@ MOUNT       "mount"
 UNMOUNT     "unmount"
 MKFS        "mkfs"
 
+
 SIZE        "-size"
 FIT         "-fit"
 UNIT        "-unit"
 PATH        "-path"
+TYPE        "-type"
+NAME        "-name"
+DELETE      "-delete"
 
 IGUAL       "~:~"
 COMENTARIO      "#"[^\r\n]*[^\r\n]
@@ -54,6 +58,9 @@ COMENTARIO      "#"[^\r\n]*[^\r\n]
 {FIT} {return(fit);}
 {UNIT} {return(unit);}
 {PATH} {return(path);}
+{TYPE} {return(type);}
+{NAME} {return(name);}
+{DELETE} {return(deletep);}
 
 {RUTA} {strcpy(yylval.text, yytext); return(ruta);}
 {RUTARARA} {strcpy(yylval.text, yytext); return(rutarara);}
