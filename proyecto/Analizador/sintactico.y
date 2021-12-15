@@ -73,15 +73,15 @@ CUERPO: MKDISK|
 
 ;
 
-MKDISK: mkdisk CUERPO_MDISK
+MKDISK: mkdisk CUERPO_MDISK {crearDisco(sizeD,unitD,pathD); }
 ;
 CUERPO_MDISK: CUERPO_MDISK P_MDISK|
 	P_MDISK
 	;
 P_MDISK:
-	 size igual numero unit igual identificador path igual ruta {crearDisco($3,$6,$9); }|
-	 path igual ruta unit igual identificador size igual numero  {crearDisco($9,$6,$3); }|
-	 size igual numero path igual ruta {crearDisco($3,"m",$6); }
+	 size igual numero {sizeD=$3;}|
+	 unit igual identificador {unitD=$3;}|
+	 path igual ruta {pathD=$3;}
 	 ;
 RMDISK: rmdisk CUERPO_RMDISK
 ;
