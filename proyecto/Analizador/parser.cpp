@@ -552,7 +552,7 @@ static const yytype_int8 yyrline[] =
 {
        0,    66,    66,    67,    70,    71,    72,    76,    78,    79,
       82,    83,    84,    86,    89,    90,    92,    94,    96,    97,
-     101,   102,   103,   104,   105,   106,   107
+     100,   101,   102,   103,   104,   105,   106
 };
 #endif
 
@@ -1407,43 +1407,43 @@ yyreduce:
     break;
 
   case 20:
-#line 101 "sintactico.y"
+#line 100 "sintactico.y"
                                   {sizeD=(yyvsp[0].number);}
 #line 1413 "parser.cpp"
     break;
 
   case 21:
-#line 102 "sintactico.y"
+#line 101 "sintactico.y"
                                          {unitD=(yyvsp[0].text);}
 #line 1419 "parser.cpp"
     break;
 
   case 22:
-#line 103 "sintactico.y"
+#line 102 "sintactico.y"
                                 {pathD=(yyvsp[0].entrance);}
 #line 1425 "parser.cpp"
     break;
 
   case 23:
-#line 104 "sintactico.y"
+#line 103 "sintactico.y"
                                          {typeD=(yyvsp[0].text);}
 #line 1431 "parser.cpp"
     break;
 
   case 24:
-#line 105 "sintactico.y"
+#line 104 "sintactico.y"
                                         {fitD=(yyvsp[0].text);}
 #line 1437 "parser.cpp"
     break;
 
   case 25:
-#line 106 "sintactico.y"
-                                            {unitD=(yyvsp[0].text);}
+#line 105 "sintactico.y"
+                                            {eliminarP(nameD,pathD,(yyvsp[0].text));}
 #line 1443 "parser.cpp"
     break;
 
   case 26:
-#line 107 "sintactico.y"
+#line 106 "sintactico.y"
                                          {nameD=(yyvsp[0].text);}
 #line 1449 "parser.cpp"
     break;
@@ -1681,6 +1681,6 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 112 "sintactico.y"
+#line 109 "sintactico.y"
 
 

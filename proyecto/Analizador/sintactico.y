@@ -102,7 +102,7 @@ P_FDISK:
 		path igual ruta {pathD=$3;}|
 		type igual identificador {typeD=$3;}|
 		fit igual identificador {fitD=$3;}|
-		deletep igual identificador {unitD=$3;}|
+		deletep igual identificador {eliminarP(nameD,pathD,$3);}|
 		name igual identificador {nameD=$3;}
 
 	 ;

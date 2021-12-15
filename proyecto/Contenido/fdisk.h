@@ -13,6 +13,7 @@ using namespace std;
 
 void crearPrimaria(string pat, char typ, char fi, long int tam, string nam);
 void crearExtendida(string pat, char typ, char fi, long tam, string nam);
+void eliminarParticion(string nam, string pat, string tipo);
 
 void crearParticion(int tam, string uni, string pat, string fi, string typ, string nam) {
     cout << "Particion: " << tam << "," << uni << "," << pat << "," << fi << "," << typ << "," << nam << "." << endl;
@@ -47,7 +48,7 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
         cout << ("AVISO: No se puede crear la particion.\n");
         banderaError = true;
     }
-    //ahorita andamos viendo
+    //ver la ruta si existe o no
     char ruta[500];
     strcpy(ruta,pat.c_str());
 
@@ -752,7 +753,94 @@ void crearExtendida(string pat, char typ, char fi, long tam, string nam){
     fclose(fileC);
 }
 
+void eliminarP(string nam, string pat, string tipo){
+    cout << "Part. delete: " << nam << "," << tipo << "," << pat << endl;
+    int largo;
+    largo = tipo.size();
+    for (int letra = 0; letra < largo; ++letra)
+    {
+        tipo[letra] = tolower(tipo[letra]);
+    }
+    if(strcmp(tipo.c_str(),"fast")){
+        eliminarParticion(nam,pat,tipo);
+    }else if(strcmp(tipo.c_str(),"full")){
+        eliminarParticion(nam,pat,tipo);
+    }else{
+        printf("ERROR: El parametro de delete no es valido.\n");
+        printf("AVISO: No se pudo eliminar la particion.\n");
+    }
+}
 
+void eliminarParticion(string nam, string pat, string tipo){
+    int BborroP = 0;
+    char ruta[500];
+    strcpy(ruta,pat.c_str());
+
+    string completePath =  pat;
+    char diskc[1];
+    strcpy(diskc, completePath.c_str());
+    FILE *file = NULL;
+    file = fopen(diskc, "r");
+    if (file != NULL)
+    {
+        cout << "La Ruta es valida" << endl;
+        FILE *fileC;
+        fileC= fopen(ruta,"rb+");
+        rewind(fileC);
+        MBR mbrtemp;
+        fread(&mbrtemp,sizeof(MBR),1,fileC);
+        if(fileC != nullptr){
+            for (int i = 0; i < 4; i++) {
+                if ((mbrtemp.partition[i].status == '1') && (BborroP == 0)) {
+
+                    if (strcmp(mbrtemp.partition[i].name, nam.c_str()) == 0) {
+
+                        if (tipo == "fast") {
+                            mbrtemp.partition[i].status = '0';
+
+                            rewind(fileC);
+                            fwrite(&mbrtemp, sizeof(MBR), 1, fileC); // aca escribo de nuevo el MBR
+
+                            cout << "AVISO: Particion eliminada correctamente. en la P  " <<i<<" FAST"<<endl;
+                            BborroP = 1;
+                        } else {
+                            mbrtemp.partition[i].status = '0';
+                            mbrtemp.partition[i].type = '\0';
+                            mbrtemp.partition[i].fit = '\0';
+                            mbrtemp.partition[i].start = 0;
+                            mbrtemp.partition[i].size = 0;
+                            strcpy(mbrtemp.partition[i].name, "\0");
+                            //fseek(archivo,0,SEEK_SET);
+                            rewind(fileC);
+                            fwrite(&mbrtemp, sizeof(MBR), 1, fileC); // aca escribo de nuevo el MBR
+
+                            cout << "AVISO: Particion eliminada correctamente.  en la P  " <<i<<" FULL"<<endl;
+                            BborroP = 1;
+                        }
+
+                    }
+
+                }
+            }
+            if(BborroP == 0){
+                printf("ERROR: No se encontro la particion.\n");
+                cout << "AVISO: No se pudo eliminar la particion " << nam <<".\n";
+            }
+        }
+        else{
+            printf("ERROR: No se pudo acceder al disco.\n");
+            printf("AVISO: No se pudo eliminar la particion.\n");
+        }
+
+        fclose(fileC);
+
+
+
+    } else{
+        cout << "ERROR esa ruta no es valida" << endl;
+
+    }
+}
 
 
 
