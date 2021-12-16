@@ -14,13 +14,17 @@ DECIMAL [0-9]+("."[0-9]+)+
 ENTERO [0-9]+
 MENOS "-"
 NEGATIVO {MENOS}({ENTERO}|{DECIMAL})
-IDENTIFICADOR ([a-zA-Z])+
+IDENTIFICADOR ([a-zA-Z])([a-zA-Z0-9_])*
 WHITESPACE [\t\r\f" "]
 DISK  "disk"
-ARCHIVO {IDENTIFICADOR}({IDENTIFICADOR}|{ENTERO})*"."{DISK}
+PNG   "png"
+JPG    "jpg"
+PDF    "pdf"
+HMTL   "html"
+ARCHIVO {IDENTIFICADOR}({IDENTIFICADOR}|{ENTERO})*"."({DISK}|{PNG}|{JPG}|{PDF}|{HMTL})
 SLASH       "/"
 RUTA        {SLASH}({IDENTIFICADOR}({IDENTIFICADOR}|{ENTERO}|{NEGATIVO}|{DECIMAL})*{SLASH})+{ARCHIVO}
-RUTARARA    \"{SLASH}({IDENTIFICADOR}|{ENTERO}|{SLASH}|" ")+{ARCHIVO}\"
+COMILLA "\""
 
 MKDISK      "mkdisk"
 RMDISK      "rmdisk"
@@ -28,12 +32,14 @@ FDISK       "fdisk"
 MOUNT       "mount"
 UNMOUNT     "unmount"
 MKFS        "mkfs"
+REP         "rep"
 
 
 SIZE        "-size"
 FIT         "-fit"
 UNIT        "-unit"
 PATH        "-path"
+PATH2       "-ruta"
 TYPE        "-type"
 NAME        "-name"
 DELETE      "-delete"
@@ -63,9 +69,11 @@ COMENTARIO      "#"[^\r\n]*[^\r\n]
 {NAME} {return(name);}
 {DELETE} {return(deletep);}
 {ID} {return(id);}
+{COMILLA} {}
+{REP} {return(rep);}
+{PATH2} {return(path2);}
 
 {RUTA} {strcpy(yylval.text, yytext); return(ruta);}
-{RUTARARA} {strcpy(yylval.text, yytext); return(rutarara);}
 {IGUAL} {return(igual);}
 {IDENTIFICADOR} {strcpy(yylval.text, yytext); return(identificador);}
 {WHITESPACE}           {}

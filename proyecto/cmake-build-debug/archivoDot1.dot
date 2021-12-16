@@ -1,0 +1,8 @@
+digraph Q { 
+  node [shape=record];
+subgraph cluster_R {
+  label = "Disco 383";
+  rank=same nodo_MBR [ label = " { mbr_tam_disco :  52428800  |  diskr_fecha_creacion :  ®  |  disk_signature :  383  |  disk_fit :  102  |}" ] ; 
+
+}
+}

@@ -15,7 +15,7 @@ void crearDisco(int size,string unit,string spath)
 
 
     cout << "Creando disco... " <<spath<< endl;
-    string completePath =  spath;
+    string completePath = rpath+ spath;
     char diskc[size + 1];
     strcpy(diskc, completePath.c_str());
     FILE *file = NULL;
@@ -66,9 +66,10 @@ void crearDisco(int size,string unit,string spath)
 
 void eliminarDisco(string pat){
 char ruta[500];
-strcpy(ruta,pat.c_str());
+    string completePath = rpath+ pat;
+strcpy(ruta,completePath.c_str());
     int error;
-    string completePath =  pat;
+
     char diskc[1];
     strcpy(diskc, completePath.c_str());
     cout << diskc << endl;
@@ -88,7 +89,7 @@ cout << "RESPUESTA: " ;
 cin >> valor;
 if(valor == ("y") ){
 cout << "AVISO: Se eliminara el disco" << endl;
-remove(pat.c_str());
+remove(completePath.c_str());
 cout << "DISCO BORRADO CON EXITO" << endl;
 }else {
 cout << " No se borro el disco " << endl;

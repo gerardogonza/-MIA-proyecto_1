@@ -23,7 +23,8 @@ void montarParticion(string pat, string nombre) {
     int BmontoP = 0;
     //RUTA
     char ruta[500];
-    strcpy(ruta, pat.c_str());
+    string completePath = rpath+pat;
+    strcpy(ruta, completePath.c_str());
     //NOMBRE DE LA PARTICION
     char nom[100];
     strcpy(nom, nombre.c_str());
@@ -33,10 +34,10 @@ void montarParticion(string pat, string nombre) {
     strcpy(nombreDisco, n.c_str());
 
 
-    if (verificarNombre(pat, nombre) == 1) {
+    if (verificarNombre(completePath, nombre) == 1) {
         char ruta[500];
-        strcpy(ruta, pat.c_str());
-        string completePath = pat;
+        strcpy(ruta, completePath.c_str());
+        string completePath = rpath+pat;
         char diskc[1];
         strcpy(diskc, completePath.c_str());
         FILE *file = NULL;
@@ -55,11 +56,11 @@ void montarParticion(string pat, string nombre) {
                         if (strcmp(mbrtemp.partition[i].name, nombre.c_str()) == 0) {
 
                             listaM disco;
-                            disco = discoMontado(pat);
+                            disco = discoMontado(completePath);
 
                             if (disco.id == 500) {
-                                agregarDisco(nombreDisco, pat);
-                                disco = discoMontado(pat);
+                                agregarDisco(nombreDisco, completePath);
+                                disco = discoMontado(completePath);
                                 //cout <<"Se encontro el " << disco.nombreDisco << "," << " se montara la particion." << endl;
 
                                 if (agregarParticion(nombre, disco) == 1) {
@@ -109,7 +110,8 @@ int verificarNombre(string pa, string nombre){
     char ruta[500];
     char nom[16];
     strcpy(nom,nombre.c_str());
-    strcpy(ruta,pa.c_str());
+    string rutacompleta=pa;
+    strcpy(ruta,rutacompleta.c_str());
 
         FILE *fileC;
 
@@ -136,7 +138,8 @@ int verificarNombre(string pa, string nombre){
 }
 
 listaM discoMontado(string pat){
-    string n = obtenerNombreDisco(pat);
+    string completePath = pat;
+    string n = obtenerNombreDisco(completePath);
     if(listaMontados.empty() == false){
         for (int i = 0; i < listaMontados.size(); i++) {
             if(listaMontados[i].nombreDisco == n){
@@ -153,12 +156,13 @@ listaM discoMontado(string pat){
 
 string obtenerNombreDisco(string pat){
     char nombre[500];
-    strcpy(nombre,pat.c_str());
+    string completePath = pat;
+    strcpy(nombre,completePath.c_str());
 
     char separador = '/';
     int contador = 0;
     string vector[40];
-    string sentencia= pat;
+    string sentencia= completePath;
 
     for(size_t p=0, q=0; p!=sentencia.npos; p=q){
         vector[contador] = sentencia.substr(p+(p!=0),(q=sentencia.find(separador, p+1))-p-(p!=0));
@@ -178,9 +182,10 @@ string obtenerNombreDisco(string pat){
 }
 
 void agregarDisco(string nombreD, string pat){
+    string completePath = pat;
     listaM nuevo;
     nuevo.id = contadorA;
-    nuevo.ruta = pat;
+    nuevo.ruta = completePath;
     nuevo.letra = letras[contadorA];
     contadorA++;
     nuevo.nombreDisco = nombreD;
@@ -276,5 +281,39 @@ void desmontarParticion(string idMount){
         printf("ERROR: No se encontro la particion solicitada.\n");
         cout <<"AVISO: No se pudo desmontar " << idMount <<" la particion.\n";
     }
+
+}
+string obtenerRutaDisco(string nombreM){
+    char nombre[10];
+    strcpy(nombre,nombreM.c_str());
+
+    string letra =  string(1,nombre[2]) ;
+    string num = string(1,nombre[3]);
+
+    cout << "N:"<< nombre << endl;
+    cout << "v." << letra << ","<< num << "." <<endl;
+
+
+    if(listaMontados.empty() == false){
+        for (int i = 0; i < listaMontados.size(); i++) {
+            if( listaMontados[i].letra == letra ){
+                cout << "Se encontro la letra " << letra << endl;
+
+                for(int j = 0; j < listaMontados[i].listaParticionesMontadas.size(); j++){
+                    if(listaMontados[i].listaParticionesMontadas[j].numeroM == atoi(num.c_str()) ){
+                        cout << "SE ENCONTRO EL DISCO MONTADO vd" << listaMontados[i].letra << listaMontados[i].listaParticionesMontadas[j].numeroM << endl;
+                        cout << listaMontados[i].ruta  << endl;
+                        return listaMontados[i].ruta;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "ERROR: El disco aun no esta montado " << endl;
+    cout << "AVISO: No se mostrar el reporte solicitado "<<endl;
+    return "nada";
+
 
 }

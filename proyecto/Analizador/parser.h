@@ -63,12 +63,14 @@ extern int yydebug;
     igual = 269,
     type = 270,
     name = 271,
-    identificador = 272,
-    deletep = 273,
-    id = 274,
-    ruta = 275,
-    rutarara = 276,
-    numero = 277
+    comillas = 272,
+    identificador = 273,
+    deletep = 274,
+    id = 275,
+    ruta = 276,
+    rep = 277,
+    path2 = 278,
+    numero = 279
   };
 #endif
 
@@ -76,14 +78,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 59 "sintactico.y"
+#line 61 "sintactico.y"
 
     int number;
     char text[200];
     char entrance[12];
     int other;
 
-#line 87 "parser.h"
+#line 89 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

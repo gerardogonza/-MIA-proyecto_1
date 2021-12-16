@@ -1,0 +1,13 @@
+digraph Q { 
+  node [shape=record];
+  nd_300[label = " { LIBRE | 81.718657\n % del disco}"];
+  nd_0       [label = "{Part13|9.140625\n% del disco }"];
+  nd_1       [label = "{Part12|9.140625\n% del disco }"];
+  nd_2       [label = "{Part13|9.140625\n% del disco }"];
+  nd_3       [label = "{Part12|9.140625\n% del disco }"];
+  nd_mbr       [label = "MBR"];
+subgraph cluster_R {
+  label = "Disco 383";
+  rank=same nd_mbr nd_0 nd_1 nd_2 nd_3 nd_300
+}
+}

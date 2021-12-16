@@ -43,11 +43,13 @@ int yyerror(const char* msg){
 %token <text> igual
 %token <text> type
 %token <text> name
+%token <text> comillas
 %token <text> identificador
 %token <text> deletep
 %token <text> id
 %token <entrance> ruta
-%token <entrance> rutarara
+%token <text> rep
+%token <text> path2
 
 
 
@@ -72,7 +74,8 @@ START: START CUERPO
 CUERPO: MKDISK|
 	RMDISK|
 	FDISK|
-	MOUNT
+	MOUNT|
+	REP
 
 ;
 
@@ -125,7 +128,18 @@ CUERPO_MOUNT: CUERPO_MOUNT P_MOUNT |
 P_MOUNT:
 		path igual ruta {pathD=$3;}|
 		name igual identificador {nameD=$3;}|
-		id igual identificador numero {string str1= to_string($4); idMountD=$3+str1;  }
+		id igual identificador  { idMountD=$3; }
+	 ;
+REP: rep CUERPO_REP {reportes(pathD, nameD, idMountD);}
+;
+CUERPO_REP: CUERPO_REP P_REP |
+	P_REP
+	;
+P_REP:
+		path igual ruta {pathD=$3;}|
+		id igual identificador  { idMountD=$3; }|
+		name igual identificador {nameD=$3;}|
+		path2 igual ruta {pathD=$3;}
 	 ;
 
 %%

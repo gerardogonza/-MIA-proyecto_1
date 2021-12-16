@@ -4,7 +4,7 @@
 #include <vector>
 
 using namespace std;
-string rpath = "/home/gerardo/Documents";
+string rpath = "/home/gerardo/Documentos";
 struct Disk {
     string spath;
     int size;

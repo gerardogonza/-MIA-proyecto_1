@@ -7,6 +7,8 @@
 #include <ctime>
 #include <ctype.h>
 #include <vector>
+#include <fstream>
+
 
 
 using namespace std;
@@ -14,6 +16,9 @@ using namespace std;
 void crearPrimaria(string pat, char typ, char fi, long int tam, string nam);
 void crearExtendida(string pat, char typ, char fi, long tam, string nam);
 void eliminarParticion(string nam, string pat, string tipo);
+string obtenerRutaDisco(string nombreM);
+void mostrarParticiones(string patD, string patR);
+void mostrarMBR(string patD, string patR);
 
 void crearParticion(int tam, string uni, string pat, string fi, string typ, string nam) {
     cout << "Particion: " << tam << "," << uni << "," << pat << "," << fi << "," << typ << "," << nam << "." << endl;
@@ -21,9 +26,17 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
     long int tama = 0;
     char fit = 'F';
     //----Verificar Unidad
+    if(uni=="K"){
+        uni="k";
+    }
+    if(uni=="M"){
+        uni="m";
+    }
+    if(uni=="B"){
+        uni="b";
+    }
     if((strcmp(uni.c_str(),"m")==0) || (strcmp(uni.c_str(),"k")==0)|| (strcmp(uni.c_str(),"b")==0)){
         if (strcmp(uni.c_str(),"m")==0){
-
             tama=1024*1024* tam;
         }else if(strcmp(uni.c_str(),"k")==0){
             tama=1024*tam;
@@ -35,6 +48,16 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
         cout <<("AVISO: No se pudo crear la particion.\n");
         banderaError = true;
     }
+    if(fi=="BF"){
+        fi="bf";
+    }
+    if(fi=="FF"){
+        fi="ff";
+    }
+    if(fi=="WF"){
+        fi="wf";
+    }
+
     if((strcmp(fi.c_str(),"bf")==0) || (strcmp(fi.c_str(),"ff")==0)|| (strcmp(fi.c_str(),"wf")==0)){
         if (strcmp(uni.c_str(),"bf")==0){
             fit  = 'B';
@@ -50,9 +73,9 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
     }
     //ver la ruta si existe o no
     char ruta[500];
-    strcpy(ruta,pat.c_str());
+    string completePath = rpath+ pat;
+    strcpy(ruta,completePath.c_str());
 
-    string completePath =  pat;
     char diskc[1];
     strcpy(diskc, completePath.c_str());
     FILE *file = NULL;
@@ -70,12 +93,12 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
     if (strcmp(typ.c_str(),"P")==0| strcmp(typ.c_str(),"p")==0){
         if(banderaError == false){
             cout << "Se va a crear una primaria"<<endl;
-            crearPrimaria(pat,'P',fit,tama,nam);
+            crearPrimaria(completePath,'P',fit,tama,nam);
         }
     }else if(strcmp(typ.c_str(),"E")==0 | strcmp(typ.c_str(),"e")==0){
         if(banderaError == false){
             cout << "Se va a crear una extendida"<<endl;
-            crearExtendida(pat,'E',fit,tama,nam);
+            crearExtendida(completePath,'E',fit,tama,nam);
         }
     }else{
         cout << "LOGICA NO JALA AUN"<<endl;
@@ -87,7 +110,8 @@ void crearParticion(int tam, string uni, string pat, string fi, string typ, stri
 void crearPrimaria(string pat, char typ, char fi, long int tam, string nam) {
     bool errorCreacion = false;
     char ruta[500];
-    strcpy(ruta, pat.c_str());
+    string rutacompleta=pat  ;
+    strcpy(ruta, rutacompleta.c_str());
 
     FILE *fileC;
     fileC = fopen(ruta, "rb+");
@@ -411,7 +435,8 @@ void crearPrimaria(string pat, char typ, char fi, long int tam, string nam) {
 void crearExtendida(string pat, char typ, char fi, long tam, string nam){
     bool errorCreacion = false;
     char ruta[500];
-    strcpy(ruta, pat.c_str());
+    string rutacompleta=pat;
+    strcpy(ruta, rutacompleta.c_str());
 
     FILE *fileC;
     fileC= fopen(ruta,"rb+");
@@ -757,14 +782,15 @@ void eliminarP(string nam, string pat, string tipo){
     cout << "Part. delete: " << nam << "," << tipo << "," << pat << endl;
     int largo;
     largo = tipo.size();
+    string rutacompleta=rpath+pat;
     for (int letra = 0; letra < largo; ++letra)
     {
         tipo[letra] = tolower(tipo[letra]);
     }
     if(strcmp(tipo.c_str(),"fast")){
-        eliminarParticion(nam,pat,tipo);
+        eliminarParticion(nam,rutacompleta,tipo);
     }else if(strcmp(tipo.c_str(),"full")){
-        eliminarParticion(nam,pat,tipo);
+        eliminarParticion(nam,rutacompleta,tipo);
     }else{
         printf("ERROR: El parametro de delete no es valido.\n");
         printf("AVISO: No se pudo eliminar la particion.\n");
@@ -777,7 +803,8 @@ void eliminarParticion(string nam, string pat, string tipo){
     char ruta[500];
     char nom[16];
     strcpy(nom,nam.c_str());
-    strcpy(ruta,pat.c_str());
+    string rutacompleta=pat;
+    strcpy(ruta,rutacompleta.c_str());
 
     FILE *fileC;
 
@@ -837,6 +864,346 @@ void eliminarParticion(string nam, string pat, string tipo){
 
 }
 
+
+void reportes(string path, string tipo, string nombre){
+
+    if(tipo == "disk"){
+        string ruta = "";
+        ruta = obtenerRutaDisco(nombre);
+        mostrarParticiones(ruta,path);
+    }
+    else{
+        string ruta = "";
+        ruta = obtenerRutaDisco(nombre);
+        mostrarMBR(ruta,path);
+        //cout << "NO LOGRE IMPLEMENTAR EL OTRO TIPO DE REPORTE" << endl;
+    }
+}
+//******************** MOSTRAR PARTICIONES
+void mostrarParticiones(string patD, string patR){
+
+    cout << "REPORTE DEL DISCO disco" << endl;
+
+    char ruta[500];
+    strcpy(ruta, patD.c_str());
+    cout << ruta << endl;
+    FILE *fileC;
+    fileC= fopen(ruta,"rb+");
+    rewind(fileC);
+
+    MBR mbrtemp;
+    fread(&mbrtemp,sizeof(MBR),1,fileC);
+
+    //****
+    vector<espacio> esp;
+    string nodos ="";
+    int contadorNodos = 0;
+    //--- Llenar el vector con los espacios usados
+
+    for (int i = 0; i < 4; i++) {
+        if (mbrtemp.partition[i].status == '1') {
+            espacio nuevo;
+            nuevo.inicio = mbrtemp.partition[i].start;
+            nuevo.final = mbrtemp.partition[i].start + mbrtemp.partition[i].size;
+            nuevo.particion = mbrtemp.partition[i].name;
+            nuevo.tip = mbrtemp.partition[i].type;
+            esp.push_back(nuevo);
+        }
+    }
+
+    //--- Insertar tamañao del ebr
+    if(1+1 == 2){
+        espacio nu;
+        nu.inicio = 0;
+        nu.final = sizeof (MBR) + 1;
+        nu.particion = "MBR";
+        nu.tip = 'M';
+        esp.push_back(nu);
+    }
+
+    //--- Ordenar de menor a mayor
+    espacio temporal;
+    for (int i = 0; i < esp.size(); i++){
+        for (int j = 0; j< esp.size()-1; j++){
+            if (esp[j].inicio > esp[j+1].inicio){ // Ordena el array de mayor a menor, cambiar el "<" a ">" para ordenar de menor a mayor
+                temporal = esp[j];
+                esp[j] = esp[j+1];
+                esp[j+1] = temporal;
+            }
+        }
+    }
+
+    //--- Mostrar como quedo ordenado
+    cout << "===========" << endl;
+    for (int i =0; i < esp.size(); i++){
+        cout<< esp[i].inicio <<"-"<< esp[i].final<<" "<<esp[i].particion << endl;
+    }
+    cout << "===========" << endl;
+    double p1 = 0, p2 = 0;
+    int p3 = 0;
+    float restita = 0;
+    int contadorV = 300;
+    int entrada = 0;
+    for (int i = esp.size()-1; i >= 0; i--) {
+        //---Ver si quedo espacio al final
+        if(entrada == 0){
+            entrada ++;
+            //cout << mbrtemp.mbr_tamano << "-" << esp[i].final << endl;
+            restita = mbrtemp.size - esp[i].final;
+            if(restita > 5){
+                //cout << "Existe un espacio en blanco entre " << esp[i].particion << " y " << esp[i-1].particion << endl;
+                nodos += "  nd_";
+                nodos += to_string(contadorV);
+                contadorV++;
+                nodos += "[label = \" { LIBRE | ";
+                p1 = restita *100;
+                p2 = p1 / mbrtemp.size;
+                nodos += to_string(p2);
+                nodos += "\\n % del disco}\"];\n";
+            }
+        }
+
+        if( esp[i].tip == 'P'){
+            nodos += "  nd_";
+            nodos += to_string(contadorNodos);
+            contadorNodos++;
+            nodos += "       [label = \"{";
+            nodos += (esp[i].particion);
+            //nodos += " | Tam: ";
+            p3 = (esp[i].final - esp[i].inicio);
+            //nodos += to_string(p3);
+            nodos += "|";
+            p1 = ( p3 * 100 );
+            p2 = ( p1 / mbrtemp.size ) ;
+            nodos += to_string(p2) ;
+            nodos += "\\n% del disco }\"];\n";
+        }
+        else if(esp[i].tip == 'M'){
+            nodos += "  nd_mbr       [label = \"MBR\"];\n";
+        }
+        else{
+            nodos += "  nd_";
+            nodos += to_string(contadorNodos);
+            contadorNodos++;
+            nodos +="      [ shape=record label=\"";
+            nodos += "{ ";
+            nodos += esp[i].particion;
+            nodos += " | ";
+            p3 = (esp[i].final - esp[i].inicio);
+            p1 = ( p3 * 100 );
+            p2 = ( p1 / mbrtemp.size ) ;
+            nodos += to_string(p2) ;
+            nodos += "\\n % del disco | { logica|logica|logica} }\"];\n";
+        }
+
+        //cout<< esp[i].inicio <<"-"<< esp[i].final<<" "<<esp[i].particion << endl;
+        //---Pequeña resta para ver si hay un vacio con el anterior
+
+        //---Ver si hay espacio entre la primera y el mbr
+        if((i-1) == 0){
+            //cout << esp[i-1].inicio << "====" <<sizeof (MBR) << endl;
+            restita = esp[i].inicio - sizeof (MBR);
+            if(restita > 5){
+                //cout << "Existe un espacio en blanco entre " << esp[i].particion << " y " << esp[i-1].particion << endl;
+                nodos += "  nd_";
+                nodos += to_string(contadorV);
+                contadorV++;
+                nodos += "[label = \" { LIBRE | ";
+                p1 = restita *100;
+                p2 = p1 / mbrtemp.size;
+                nodos += to_string(p2);
+                nodos += "\\n % del disco}\"];\n";
+            }
+        }
+            //---Ver si hay espacio entre particiones
+        else {
+            restita = esp[i].inicio - esp[i-1].final;
+            if(restita > 5){
+                //cout << "Existe un espacio en blanco entre " << esp[i].particion << " y " << esp[i-1].particion << endl;
+                nodos += "  nd_";
+                nodos += to_string(contadorV);
+                contadorV++;
+                nodos += "[label = \" { LIBRE | ";
+                p1 = restita *100;
+                p2 = p1 / mbrtemp.size;
+                nodos += to_string(p2);
+                nodos += "\\n % del disco}\"];\n";
+            }
+        }
+    }
+
+    //****
+
+    fclose(fileC);
+
+    string grafo = "digraph Q { \n";
+    grafo += "  node [shape=record];\n";
+    grafo += nodos;
+    grafo += "subgraph cluster_R {\n";
+    grafo += "  label = \"Disco ";
+    grafo += to_string(mbrtemp.diskSignature);
+    grafo += "\";\n";
+    grafo += "  rank=same nd_mbr";
+    for(int i = 0; i < contadorNodos; i++){
+        grafo += " nd_";
+        grafo += to_string(i);
+    }
+    for (int i = 300; i < contadorV; i++) {
+        grafo += " nd_";
+        grafo += to_string(i);
+    }
+
+    string cc = "dot -Tpng /home/gerardo/Documentos/archivoDot.dot -o " ;
+    cc += patR;
+    //cout << cc << endl;
+    grafo += "\n}\n";
+    grafo += "}\n";
+    //cout <<grafo <<endl;
+
+    char ru[500];
+    strcpy(ru, cc.c_str());
+    cout << "ru: " << ru << endl;
+
+    ofstream file;
+    file.open("/home/gerardo/Documentos/archivoDot.dot");
+    file << grafo;
+    file.close();
+
+    system(ru);
+
+    string ccc ="nohup display ";
+    ccc+= patR;
+    ccc+= " &";
+
+    char rut[500];
+    strcpy(rut, ccc.c_str());
+    cout << ccc << endl;
+
+    system(rut);
+    getchar();
+
+
+}
+
+
+
+void mostrarMBR(string patD, string patR){
+    cout << "REPORTE DEL DISCO mbr" << endl;
+
+
+
+    string grafo_final = "";
+
+    char ruta[500];
+    strcpy(ruta, patD.c_str());
+    cout << ruta << endl;
+    FILE *fileC;
+    fileC= fopen(ruta,"rb+");
+    rewind(fileC);
+
+    MBR mbrtemp;
+    fread(&mbrtemp,sizeof(MBR),1,fileC);
+
+    //****
+    vector<espacio> esp;
+    string nodos ="";
+    int contadorNodos = 0;
+    //--- Llenar el vector con los espacios usados
+    grafo_final += " mbr_tam_disco :  " ;
+    grafo_final +=  to_string(mbrtemp.size);
+    grafo_final += "  | " ;
+
+    grafo_final += " diskr_fecha_creacion :  " ;
+    grafo_final +=  mbrtemp.creationDate;
+    grafo_final += "  | " ;
+
+    grafo_final += " disk_signature :  " ;
+    grafo_final +=  to_string(mbrtemp.diskSignature);
+    grafo_final += "  | " ;
+
+    grafo_final += " disk_fit :  " ;
+    grafo_final +=  to_string(mbrtemp.fit);
+    grafo_final += "  |" ;
+    for (int i = 0; i < 4; i++) {
+        if (mbrtemp.partition[0].status == 'V' || mbrtemp.partition[0].status == '0') {
+            grafo_final += " part_1 status: ";
+            grafo_final += to_string(mbrtemp.partition[i].status);
+            grafo_final += " |";
+
+            grafo_final += " part_1 type:  ";
+            grafo_final += to_string(mbrtemp.partition[i].type);
+            grafo_final += " |";
+
+            grafo_final += " part_1 fit:  ";
+            grafo_final += to_string(mbrtemp.partition[i].fit);
+            grafo_final += " |";
+
+            grafo_final += " part_1 start: ";
+            grafo_final += to_string(mbrtemp.partition[i].start);
+            grafo_final += " |";
+
+            grafo_final += " part_1 size:  ";
+            grafo_final += to_string(mbrtemp.partition[i].size);
+            grafo_final += " |";
+
+            grafo_final += " part_1 fit:  ";
+            grafo_final += mbrtemp.partition[i].name;
+            grafo_final += " |";
+
+        }
+    }
+
+
+    //***************
+
+    fclose(fileC);
+
+    string grafo = "digraph Q { \n";
+    grafo += "  node [shape=record];\n";
+    grafo += nodos;
+    grafo += "subgraph cluster_R {\n";
+    grafo += "  label = \"Disco ";
+    grafo += to_string(mbrtemp.diskSignature);
+    grafo += "\";\n";
+    grafo += "  rank=same ";
+    grafo += "nodo_MBR [ label = \" {";
+    grafo += grafo_final;
+    grafo += "}\" ] ; \n";
+
+
+    grafo += "\n}\n";
+    grafo += "}\n";
+    //cout << grafo << endl;
+    string cc = "dot -Tpng /home/gerardo/Documentos/archivoDot1.dot -o " ;
+    cc += patR;
+    //cout << cc << endl;
+
+    //cout <<grafo <<endl;
+
+    char ru[500];
+    strcpy(ru, cc.c_str());
+    cout << "ru: " << ru << endl;
+
+    ofstream file;
+    file.open("/home/gerardo/Documentos/archivoDot1.dot");
+    file << grafo;
+    file.close();
+    //system("dot -Tpng archivoDot.dot -o grafoMBR.png");
+    system(ru);
+
+    string ccc ="nohup display ";
+    ccc+= patR;
+    ccc+= " &";
+
+    char rut[500];
+    strcpy(rut, ccc.c_str());
+    cout << ccc << endl;
+    //system("nohup display grafoMBR.png &" );
+    system(rut);
+    getchar();
+
+
+}
 
 
 
