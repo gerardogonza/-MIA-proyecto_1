@@ -50,8 +50,9 @@ int main()
     if (opcion==2){
         string p;
         cout << "INGRESA RUTA DEL ARCHIVO DE ENTRADA" ;
-//        cin >> p;
-        ifstream archivo_entrada("/home/gerardo/Documentos/archivo.txt");
+       cin >> p;
+//        "/home/gerardo/Documentos/archivo.txt"
+        ifstream archivo_entrada(p);
         string linea;
 
         while(getline(archivo_entrada, linea)) {
