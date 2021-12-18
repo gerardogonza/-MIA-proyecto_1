@@ -1,7 +1,6 @@
 create database if not exists practica1;
 use practica1;
 CREATE TABLE t_level(
-         id VARCHAR(30) ,
          project_id VARCHAR(30) NOT NULL,
          project_location_id VARCHAR(30),
          geoname_id	INT,
@@ -13,7 +12,6 @@ CREATE TABLE t_level(
          );
          
 CREATE TABLE t_transactions(
-        id  VARCHAR(40),
         transaction_id VARCHAR(40),
         project_id VARCHAR(30),
         transaction_isodate date,
@@ -26,7 +24,6 @@ CREATE TABLE t_transactions(
 
 
 CREATE TABLE t_project(
-         idProyecto  VARCHAR(40),
         project_id	char(30),
         is_geocoded	INT,
         project_title INT,
@@ -49,7 +46,6 @@ CREATE TABLE t_project(
 
     
 CREATE TABLE t_geoname(
-         id VARCHAR(40),
          geoname_id	INT,
          place_name	VARCHAR(30),
          latitude	FLOAT (7,4),
@@ -64,7 +60,6 @@ CREATE TABLE t_geoname(
 );
 
 CREATE TABLE t_countrycodes (
-    id VARCHAR(40),
     name VARCHAR(40), 
     iso2 VARCHAR(20),
     name_name VARCHAR(40),
