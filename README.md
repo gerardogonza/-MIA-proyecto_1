@@ -6,7 +6,7 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 # ¿Cuál fue el proyecto de mayor duración? 
 ![Captura de pantalla de 2021-12-19 21-35-24](https://user-images.githubusercontent.com/70788372/146708106-9961beca-032b-4756-a990-20269b53a16f.png)
 # ¿Cuál fue el proyecto de menor duración?
-![Captura de pantalla de 2021-12-19 21-38-08](https://user-images.githubusercontent.com/70788372/146708551-65c8aff4-ef19-4fba-9fe9-23f2694fe5a9.png)
+![Captura de pantalla de 2021-12-19 21-45-23](https://user-images.githubusercontent.com/70788372/146708850-200b3594-7483-4360-991b-287593d5f5c8.png)
 # Top 5 de países con más proyectos asignados
 ![Captura de pantalla de 2021-12-19 21-38-21](https://user-images.githubusercontent.com/70788372/146708668-6b832842-07be-46e5-946c-ba321dad2dd0.png)
 # Top 5 de países con menos proyectos asignados 
@@ -21,6 +21,7 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 ![Captura de pantalla de 2021-12-19 21-41-12](https://user-images.githubusercontent.com/70788372/146708699-ff10c828-0eab-45c1-b521-e5c47acfce3b.png)
 # Top  3  de  las  Transacciones  más  Costosas  RI-East  Africa  Public  Health Laboratory Networking Project
 ![Captura de pantalla de 2021-12-19 21-41-36](https://user-images.githubusercontent.com/70788372/146708701-60650fc7-c889-4783-bb80-75858cc1e304.png)
+
 
 
 
