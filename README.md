@@ -23,6 +23,9 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 ![Captura de pantalla de 2021-12-19 21-41-36](https://user-images.githubusercontent.com/70788372/146708701-60650fc7-c889-4783-bb80-75858cc1e304.png)
 # VIDEO DE YT
 https://www.youtube.com/watch?v=6bZ9Lgn7eVc
+# ER
+![image](https://user-images.githubusercontent.com/70788372/146716903-32396ccc-c94c-4fed-81d3-7b27d112c1df.png)
+
 
 
 
