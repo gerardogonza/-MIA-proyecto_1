@@ -21,7 +21,8 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 ![Captura de pantalla de 2021-12-19 21-41-12](https://user-images.githubusercontent.com/70788372/146708699-ff10c828-0eab-45c1-b521-e5c47acfce3b.png)
 # Top  3  de  las  Transacciones  más  Costosas  RI-East  Africa  Public  Health Laboratory Networking Project
 ![Captura de pantalla de 2021-12-19 21-41-36](https://user-images.githubusercontent.com/70788372/146708701-60650fc7-c889-4783-bb80-75858cc1e304.png)
-
+#VIDEO DE YT
+https://www.youtube.com/watch?v=6bZ9Lgn7eVc
 
 
 
