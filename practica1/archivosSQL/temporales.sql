@@ -1,34 +1,34 @@
 create database if not exists practica1;
 use practica1;
 CREATE TABLE t_level(
-         project_id VARCHAR(30) NOT NULL,
+         project_id VARCHAR(30) ,
          project_location_id VARCHAR(30),
          geoname_id	INT,
          transactions_start_year INT,
          transactions_end_year INT,
-         even_split_commitments DECIMAL (20, 10),
-         even_split_disbursements DECIMAL (20, 10)
+         even_split_commitments FLOAT,
+         even_split_disbursements FLOAT
        
          );
          
 CREATE TABLE t_transactions(
         transaction_id VARCHAR(40),
-        project_id VARCHAR(30),
-        transaction_isodate date,
+        project_id VARCHAR(80),
+        transaction_isodate VARCHAR(30),
         transaction_year INT,
         transaction_value_code VARCHAR(20),
         transaction_currency VARCHAR(20),
-        transaction_value FLOAT (7,4)
+        transaction_value FLOAT
        
     );
 
 
 CREATE TABLE t_project(
-        project_id	char(30),
+        project_id	varchar(30),
         is_geocoded	INT,
-        project_title INT,
-        start_actual_isodate date,	
-        end_actual_isodate date,	
+        project_title VARCHAR(80),
+        start_actual_isodate VARCHAR(30),	
+        end_actual_isodate VARCHAR(30),	
         donors	VARCHAR(30),
         donors_iso3	VARCHAR(30),
         recipients	VARCHAR(30),
@@ -38,8 +38,8 @@ CREATE TABLE t_project(
         status	VARCHAR(30),
         transactions_start_year	INT,
         transactions_end_year	INT,
-        total_commitments	FLOAT (7,4),
-        total_disbursements	FLOAT (7,4)
+        total_commitments	FLOAT,
+        total_disbursements	FLOAT
          
         
 );
@@ -48,8 +48,8 @@ CREATE TABLE t_project(
 CREATE TABLE t_geoname(
          geoname_id	INT,
          place_name	VARCHAR(30),
-         latitude	FLOAT (7,4),
-         longitude	FLOAT (7,4),
+         latitude	FLOAT ,
+         longitude	FLOAT ,
          location_type_code	VARCHAR(30),
          location_type_name	VARCHAR(80),
          gazetteer_adm_code	VARCHAR(70),
@@ -61,7 +61,7 @@ CREATE TABLE t_geoname(
 
 CREATE TABLE t_countrycodes (
     name VARCHAR(40), 
-    iso2 VARCHAR(20),
+    iso2 VARCHAR(40),
     name_name VARCHAR(40),
     name_aiddata_code INT,
     name_aiddata_name VARCHAR(40),
@@ -81,4 +81,9 @@ CREATE TABLE t_countrycodes (
 
 );
     
+CREATE TABLE t_locations(
+        location_type_code VARCHAR(30),
+        location_type_name VARCHAR(70)
+);
+
 

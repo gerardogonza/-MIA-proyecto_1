@@ -14,3 +14,4 @@ drop table if exists t_transactions;
 drop table if exists t_project;
 drop table if exists t_geoname;
 drop table if exists t_countrycodes;
+drop table if exists t_locations;

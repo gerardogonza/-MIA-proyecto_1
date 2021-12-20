@@ -12,8 +12,8 @@ CREATE TABLE geoname(
          id INT NOT NULL AUTO_INCREMENT,
          geoname_id	INT,
          place_name	VARCHAR(30),
-         latitude	FLOAT (7,4),
-         longitude	FLOAT (7,4),
+         latitude	FLOAT ,
+         longitude	FLOAT ,
          location_type_code	INT,
          location_type_name	VARCHAR(80),
          gazetteer_adm_code	VARCHAR(70),
@@ -24,18 +24,7 @@ CREATE TABLE geoname(
           foreign key (location_type_code) references locations(idLocation)
 );
 
- CREATE TABLE level(
-         id INT NOT NULL AUTO_INCREMENT,
-         project_id VARCHAR(30) NOT NULL,
-         project_location_id VARCHAR(30),
-         geoname_id	INT,
-         transactions_start_year INT,
-         transactions_end_year INT,
-         even_split_commitments DECIMAL (20, 10),
-         even_split_disbursements DECIMAL (20, 10),
-         PRIMARY KEY (id) ,
-         foreign key (geoname_id) references geoname(id)
-         );
+
 CREATE TABLE countrycodes (
         id INT NOT NULL AUTO_INCREMENT,
         name VARCHAR(40), 
@@ -62,11 +51,11 @@ CREATE TABLE countrycodes (
 );
 CREATE TABLE project(
          idProyecto  INT NOT NULL AUTO_INCREMENT,
-        project_id	char(30),
+         project_id	varchar(30),
         is_geocoded	INT,
-        project_title INT,
-        start_actual_isodate date,	
-        end_actual_isodate date,	
+        project_title VARCHAR(80),
+        start_actual_isodate VARCHAR(30),	
+        end_actual_isodate VARCHAR(30),	
         donors	VARCHAR(30),
         donors_iso3	VARCHAR(30),
         recipients	INT,
@@ -76,8 +65,8 @@ CREATE TABLE project(
         status	VARCHAR(30),
         transactions_start_year	INT,
         transactions_end_year	INT,
-        total_commitments	FLOAT (7,4),
-        total_disbursements	FLOAT (7,4),
+        total_commitments	FLOAT,
+        total_disbursements	FLOAT,
           PRIMARY KEY (idProyecto) ,
          foreign key (recipients) references countrycodes(id)
 );
@@ -87,20 +76,32 @@ CREATE TABLE currency(
         PRIMARY KEY (idCurrency) 
        
 );
-
+ CREATE TABLE level(
+         id INT NOT NULL AUTO_INCREMENT,
+         project_id INT ,
+         project_location_id VARCHAR(30),
+         geoname_id	INT,
+         transactions_start_year INT,
+         transactions_end_year INT,
+         even_split_commitments FLOAT,
+         even_split_disbursements FLOAT,
+         PRIMARY KEY (id) ,
+         foreign key (geoname_id) references geoname(id),
+         foreign key (project_id) references project(idProyecto)
+         );
 
 CREATE TABLE transactions(
         id INT NOT NULL AUTO_INCREMENT,
-        transaction_id INT,
-        project_id VARCHAR(30),
-        transaction_isodate date,
+        transaction_id VARCHAR(40),
+        project_id INT,
+        transaction_isodate VARCHAR(30),
         transaction_year INT,
         transaction_value_code VARCHAR(20),
-        transaction_currency VARCHAR(20),
-        transaction_value INT,
+        transaction_currency INT,
+        transaction_value FLOAT,
         PRIMARY KEY (id),
-        foreign key (transaction_id) references project(idProyecto),
-         foreign key (transaction_value) references currency(idCurrency)
+        foreign key (project_id) references project(idProyecto),
+         foreign key (transaction_currency) references currency(idCurrency)
     );
 
 
