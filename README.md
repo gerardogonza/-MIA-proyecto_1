@@ -28,6 +28,7 @@ https://www.youtube.com/watch?v=6bZ9Lgn7eVc
 # Tabla locations
 
 [Captura de pantalla de 2021-12-19 23-48-56](https://user-images.githubusercontent.com/70788372/146718287-0de3bc83-ae3b-427f-9d39-55078279b9c2.png)
+# GEOGAME
 ![Captura de pantalla de 2021-12-19 23-49-12](https://user-images.githubusercontent.com/70788372/146718319-fc41bfe9-795f-4642-8cae-36b17da26997.png)
 
 ![Captura de pantalla de 2021-12-19 23-49-30](https://user-images.githubusercontent.com/70788372/146718328-0fffce08-6886-4c3d-98a4-5d466a13148b.png)
