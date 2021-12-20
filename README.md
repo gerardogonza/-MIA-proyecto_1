@@ -23,10 +23,19 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 ![Captura de pantalla de 2021-12-19 21-41-36](https://user-images.githubusercontent.com/70788372/146708701-60650fc7-c889-4783-bb80-75858cc1e304.png)
 # VIDEO DE YT
 https://www.youtube.com/watch?v=6bZ9Lgn7eVc
-# ER
+# ER![Captura de pantalla de 2021-12-19 23-48-56](https://user-images.githubusercontent.com/70788372/146718287-0de3bc83-ae3b-427f-9d39-55078279b9c2.png)
+# Tabla locations
 ![image](https://user-images.githubusercontent.com/70788372/146716903-32396ccc-c94c-4fed-81d3-7b27d112c1df.png)
 
+![Captura de pantalla de 2021-12-19 23-49-12](https://user-images.githubusercontent.com/70788372/146718319-fc41bfe9-795f-4642-8cae-36b17da26997.png)
 
+![Captura de pantalla de 2021-12-19 23-49-30](https://user-images.githubusercontent.com/70788372/146718328-0fffce08-6886-4c3d-98a4-5d466a13148b.png)
+![Captura de pantalla de 2021-12-19 23-50-09](https://user-images.githubusercontent.com/70788372/146718385-981da506-4bfc-44c3-8307-58591e008a17.png)
 
+![Captura de pantalla de 2021-12-19 23-50-25](https://user-images.githubusercontent.com/70788372/146718394-55663b10-e54b-4c7a-9af5-5744d672c103.png)
+
+![Captura de pantalla de 2021-12-19 23-50-39](https://user-images.githubusercontent.com/70788372/146718402-d0357cbf-5e67-4480-8611-2eba62ce2835.png)
+
+![Captura de pantalla de 2021-12-19 23-51-11](https://user-images.githubusercontent.com/70788372/146718406-df803501-fc0c-41a3-b3d5-3f891bd373e5.png)
 
 
