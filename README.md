@@ -25,7 +25,7 @@ MIA Vacaciones Diciembre 2021 - Gerardo Steve Munoz Contreras - 201900853
 https://www.youtube.com/watch?v=6bZ9Lgn7eVc
 # ER!
 ![image](https://user-images.githubusercontent.com/70788372/146716903-32396ccc-c94c-4fed-81d3-7b27d112c1df.png)
-# Tabla locations
+# Tabla Level
 
 [Captura de pantalla de 2021-12-19 23-48-56](https://user-images.githubusercontent.com/70788372/146718287-0de3bc83-ae3b-427f-9d39-55078279b9c2.png)
 # GEOGAME
@@ -42,5 +42,8 @@ https://www.youtube.com/watch?v=6bZ9Lgn7eVc
 # TYPE_STATUS
 
 ![Captura de pantalla de 2021-12-19 23-51-11](https://user-images.githubusercontent.com/70788372/146718406-df803501-fc0c-41a3-b3d5-3f891bd373e5.png)
+
+# LOCATION
+![Captura de pantalla de 2021-12-19 23-58-44](https://user-images.githubusercontent.com/70788372/146718908-7a1df364-e0dc-4f92-9bb3-3b7dfccd1200.png)
 
 
